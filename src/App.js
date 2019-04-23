@@ -27,7 +27,7 @@ class App extends Component {
   render() {
     return (
       <div id="app">
-          <div class="container">
+          <div className="container">
             <Root/>
           </div>
       </div>

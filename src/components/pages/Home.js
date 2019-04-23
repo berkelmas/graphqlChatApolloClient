@@ -8,7 +8,7 @@ class Home extends Component {
   render () {
     return(
       <div className="app">
-        <div class="container">
+        <div className="container">
           <Header/>
           <AddSnap/>
           <Snaps/>

@@ -3,12 +3,12 @@ import {NavLink} from 'react-router-dom';
 
 export const Header = (props) => {
   return(
-    <div class="header">
-        <div class="logo">
-            <h2 class="logo__title">easysnap</h2>
+    <div className="header">
+        <div className="logo">
+            <h2 className="logo__title">easysnap</h2>
         </div>
 
-        <div class="header_menu">
+        <div className="header_menu">
           <NavLink exact to="/" >
             <div>
                 snaps
