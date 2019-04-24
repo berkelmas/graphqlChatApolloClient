@@ -22,13 +22,16 @@ export class LoginForm extends React.Component {
     this.setState({
       [e.target.name] : e.target.value
     })
-    e.preventDefault();
   }
 
   loginForm = (e, loginFunction) => {
     loginFunction()
       .then(res => localStorage.setItem('token', res.data.signInMutation.token))
       .catch(err => console.log('giriş yapılamadı...'))
+    this.setState({
+      username: '',
+      password: ''
+    })
     e.preventDefault();
   }
 
