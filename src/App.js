@@ -1,9 +1,13 @@
 import React, {Component} from 'react';
 import './index.css';
 
+import {Header} from './components/micros/Header';
 import Home from './components/pages/Home';
 import Register from './components/pages/Register';
 import Login from './components/pages/Login';
+import Profile from './components/pages/Profile';
+
+import {SessionComponent} from './components/SessionComponent';
 
 import {
   BrowserRouter as Router,
@@ -12,23 +16,27 @@ import {
   Redirect
 } from 'react-router-dom';
 
-const Root = () => (
+const Root = ({refetch, user}) => (
   <Router>
-    <Switch>
-      <Route path="/" exact component={Home} />
-      <Route path="/login" exact component={Login} />
-      <Route path="/register" exact component={Register} />
-      <Redirect to="/" />
-    </Switch>
+    <Header user= {user} refetch={refetch}/>
+      <Switch>
+        <Route path="/" exact render={() => (<Home />)} />
+        <Route path="/login" exact render={() => (<Login refetch={refetch}/>)} />
+        <Route path="/register" exact render={() => (<Register refetch={refetch} />)} />
+        <Route path="/profile" exact render={() => (<Profile user={user}/>)} />
+        <Redirect to="/" />
+      </Switch>
   </Router>
 )
+
+const SessionRootComponent = SessionComponent(Root);
 
 class App extends Component {
   render() {
     return (
       <div id="app">
           <div className="container">
-            <Root/>
+            <SessionRootComponent/>
           </div>
       </div>
     );

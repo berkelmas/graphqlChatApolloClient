@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
-
-import {Header} from '../micros/Header';
-import {JoinForm} from '../micros/JoinForm';
+import JoinForm from '../micros/JoinForm';
 
 class Register extends Component {
 
@@ -9,8 +7,7 @@ class Register extends Component {
     return(
       <div className="app">
         <div className="container">
-          <Header/>
-          <JoinForm/>
+          <JoinForm refetch={this.props.refetch}/>
         </div>
       </div>
     )

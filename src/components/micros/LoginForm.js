@@ -1,8 +1,9 @@
 import React from 'react'
 import {Mutation} from 'react-apollo';
+import {withRouter} from 'react-router-dom';
 import {signIn} from '../../backend/mutation';
 
-export class LoginForm extends React.Component {
+class LoginForm extends React.Component {
   constructor(props){
     super(props);
 
@@ -26,7 +27,11 @@ export class LoginForm extends React.Component {
 
   loginForm = (e, loginFunction) => {
     loginFunction()
-      .then(res => localStorage.setItem('token', res.data.signInMutation.token))
+      .then(async ({data}) => {
+        localStorage.setItem('token', data.signInMutation.token);
+        await this.props.refetch();
+        this.props.history.push('/');
+      })
       .catch(err => console.log('giriş yapılamadı...'))
     this.setState({
       username: '',
@@ -57,3 +62,5 @@ export class LoginForm extends React.Component {
     )
   }
 }
+
+export default withRouter(LoginForm);

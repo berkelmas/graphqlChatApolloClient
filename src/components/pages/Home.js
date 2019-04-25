@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-
-import {Header} from '../micros/Header';
 import {Snaps} from '../micros/Snaps';
 import {AddSnap} from '../micros/AddSnap';
 
@@ -9,7 +7,6 @@ class Home extends Component {
     return(
       <div className="app">
         <div className="container">
-          <Header/>
           <AddSnap/>
           <Snaps/>
         </div>

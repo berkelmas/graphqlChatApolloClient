@@ -1,15 +1,13 @@
 import React, {Component} from 'react';
 
-import {Header} from '../micros/Header';
-import {LoginForm} from '../micros/LoginForm';
+import LoginForm from '../micros/LoginForm';
 
 class Login extends Component {
   render () {
     return(
       <div className="app">
         <div className="container">
-          <Header/>
-          <LoginForm/>
+          <LoginForm refetch={this.props.refetch}/>
         </div>
       </div>
     )

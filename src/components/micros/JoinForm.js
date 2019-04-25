@@ -1,8 +1,10 @@
 import React from 'react';
 import {Mutation} from 'react-apollo';
+import {withRouter} from 'react-router-dom';
+
 import {signUp} from '../../backend/mutation';
 
-export class JoinForm extends React.Component {
+class JoinForm extends React.Component {
   constructor(props) {
     super(props);
     this.state= {
@@ -29,7 +31,11 @@ export class JoinForm extends React.Component {
 
   registerForm(e, registerFunction) {
     registerFunction()
-      .then(res => localStorage.setItem('token', res.data.signUpMutation.token))
+      .then(async ({data}) => {
+        localStorage.setItem('token', data.signUpMutation.token);
+        await this.props.refetch();
+        this.props.history.push('/');
+      })
       .catch(err => console.log('Kullanıcı Kaydı Oluşturulamadı...'));
 
     this.setState({
@@ -71,3 +77,5 @@ export class JoinForm extends React.Component {
     )
   }
 }
+
+export default withRouter(JoinForm);

@@ -1,31 +1,31 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
+import LogOut from './LogOut';
 
-export const Header = (props) => {
-  return(
+export const Header = ({user, refetch}) => {
+  return user ? (
     <div className="header">
         <div className="logo">
             <h2 className="logo__title">easysnap</h2>
         </div>
 
         <div className="header_menu">
-          <NavLink exact to="/" >
-            <div>
-                snaps
-            </div>
-          </NavLink>
+            <NavLink exact to="/" >snaps</NavLink>
+            <NavLink exact to="/profile" >profile</NavLink>
 
-            <NavLink exact to="/login" >
-              <div>
-                  login
-              </div>
-            </NavLink>
+            <LogOut refetch={refetch}/>
+        </div>
+    </div>
+  ) : (
+    <div className="header">
+        <div className="logo">
+            <h2 className="logo__title">easysnap</h2>
+        </div>
 
-            <NavLink exact to="/register" >
-              <div>
-                  join
-              </div>
-            </NavLink>
+        <div className="header_menu">
+            <NavLink exact to="/" >snaps</NavLink>
+            <NavLink exact to="/login" >login</NavLink>
+            <NavLink exact to="/register">join</NavLink>
         </div>
     </div>
   )
