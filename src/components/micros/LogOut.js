@@ -14,7 +14,7 @@ const LogOut = ({refetch, history}) => (
   <ApolloConsumer>
     {client => {
       return (
-        <p style={{display:'inline'}} onClick={() => logOutEvent(refetch, history)} >Çıkış Yap</p>
+        <button style={{display:'inline', all: 'unset'}} onClick={() => logOutEvent(refetch, history)} >Çıkış Yap</button>
       )
     }}
   </ApolloConsumer>

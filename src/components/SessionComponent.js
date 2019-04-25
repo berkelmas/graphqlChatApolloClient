@@ -10,12 +10,9 @@ export const SessionComponent = Component => props => {
         if (loading) return (<p>Geliyor knk</p>)
         if (error) return (<p>Bi Sorun var Knk</p>)
         else {
-          console.log(data.activeUser)
           return (<Component {...props} refetch={refetch} user={data.activeUser} />)
         }
       }}
     </Query>
   )
 }
-
-//(data.activeUser ? <Component {...props} refetch={refetch} user={data.activeUser} /> : <Component {...props} refetch={refetch} /> )
