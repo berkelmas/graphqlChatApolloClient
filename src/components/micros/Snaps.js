@@ -1,31 +1,34 @@
-import React from 'react'
+import React, {Fragment} from 'react'
+import {Query} from 'react-apollo';
+import {allSnaps} from '../../backend/query';
 
-export const Snaps = (props) => {
+export const Snaps = props => {
   return (
-    <div>
-      <div>
-          <ul className="snaps">
-              <li>
-                  <div className="title">Lorem ipsum dolor sit amet</div>
-                  <div className="date">
-                      <span>now</span>
-                  </div>
-              </li>
-              <li>
-                  <div className="title">Curabitur gravida arcu ac tortor dignissim.</div>
-                  <div className="date">
-                      <span>5 minutes ago</span>
-                  </div>
-              </li>
-              <li>
-                  <div className="title">Tristique risus nec feugiat in fermentum.</div>
-                  <div className="date">
-                      <span>7 minutes ago</span>
-                  </div>
-              </li>
-          </ul>
-      </div>
-      <div className="counter">3 snap(s)</div>
-    </div>
+    <Query query={allSnaps}>
+      {({loading, error, data, refetch}) => {
+        if (loading) return (<p>Geliyor Knk</p>)
+        if (error) return (<p>Yükleniyor Knk</p>)
+        else {
+          return (
+          <div>
+            <div>
+                <ul className="snaps">
+                  {data.allSnaps.map(res => (
+                    <Fragment key={res.id}>
+                      <li>
+                          <div className="title">{res.text}</div>
+                          <div className="date">
+                              <span>{res.user.username}</span>
+                          </div>
+                      </li>
+                    </Fragment>
+                  ))}
+                </ul>
+            </div>
+            <div className="counter">{data.allSnaps.length} snap(s)</div>
+          </div>
+        )}
+      }}
+    </Query>
   )
 }
