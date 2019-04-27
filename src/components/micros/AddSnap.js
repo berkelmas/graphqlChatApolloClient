@@ -16,7 +16,7 @@ class AddSnap extends React.Component {
   sendSnap = (e, addSnapFunction) => {
     if (this.state.snap !== '') {
       addSnapFunction()
-        .then(res => console.log(res))
+        .then(res => res)
         .catch(err => console.log(err))
       this.setState({
         snap: '',
@@ -38,6 +38,18 @@ class AddSnap extends React.Component {
     })
   }
 
+  updateCache = (cache, {data : {snapMutation}}) => {
+    const {allSnaps: snaps} = cache.readQuery({
+      query: allSnaps
+    })
+    cache.writeQuery({
+      query: allSnaps,
+      data: {
+        allSnaps: [...snaps, snapMutation]
+      }
+    })
+  }
+
   render() {
     return (
       <div>
@@ -48,14 +60,11 @@ class AddSnap extends React.Component {
 
         <div>
           {this.props.user &&
-            <Mutation mutation={snapMutation}
-              variables={
-                {
-                  user_id: this.props.user.id,
-                  text: this.state.snap}
-                }
-              refetchQueries={[{query: allSnaps}]}
-              >
+            <Mutation
+              mutation={snapMutation}
+              variables={{text: this.state.snap, user_id: this.props.user.id}}
+              update={this.updateCache}
+            >
               {(addSnapFunction, {loading, error, data}) => (
                 <form onSubmit={e => this.sendSnap(e, addSnapFunction)}>
                     <input name="snap" value={this.state.snap} onChange={this.updateState} className="add-snap__input" type="text" placeholder="add snap" />

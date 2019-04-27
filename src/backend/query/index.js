@@ -17,6 +17,7 @@ query {
     text
     user_id
     user {
+      id
       username
     }
   }

@@ -19,9 +19,12 @@ mutation($username:String! $password:String!) {
 export const snapMutation = gql`
 mutation($user_id: ID! $text: String!) {
   snapMutation(text: $text user_id: $user_id) {
+    id
     text
+    user_id
     user{
-      id username
+      id
+      username
     }
   }
 }
