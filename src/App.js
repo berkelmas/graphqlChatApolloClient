@@ -26,7 +26,7 @@ const Root = ({refetch, user}) => (
         <Route path="/login" exact render={() => (<AlreadyAuthedLogin user={user} refetch={refetch}/>)} />
         <Route path="/register" exact render={() => (<AlreadyAuthedRegister user={user} refetch={refetch} />)} />
         <Route path="/profile" exact render={() => (<AuthProfilePage user={user}/>)} />
-        <Redirect to="/" />
+        <Redirect to="/"/>
       </Switch>
   </Router>
 )

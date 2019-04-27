@@ -15,7 +15,7 @@ export const Snaps = props => {
                 <ul className="snaps">
                   {data.allSnaps.slice(0).reverse().map(res => (
                     <Fragment key={res.id}>
-                      <li className={res.id < 0 && 'optimistic'}>
+                      <li className={res.id < 0 ? 'optimistic' : 'yok'}>
                           <div className="title">{res.text}</div>
                           <div className="date">
                               <span>{res.user.username}</span>
