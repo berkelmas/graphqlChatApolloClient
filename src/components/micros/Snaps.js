@@ -13,7 +13,7 @@ export const Snaps = props => {
           <div>
             <div>
                 <ul className="snaps">
-                  {data.allSnaps.map(res => (
+                  {data.allSnaps.slice(0).reverse().map(res => (
                     <Fragment key={res.id}>
                       <li>
                           <div className="title">{res.text}</div>

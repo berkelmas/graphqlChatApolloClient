@@ -48,7 +48,14 @@ class AddSnap extends React.Component {
 
         <div>
           {this.props.user &&
-            <Mutation mutation={snapMutation} variables={{user_id: this.props.user.id, text: this.state.snap}} refetchQueries={() => {return [{query: allSnaps}]}}>
+            <Mutation mutation={snapMutation}
+              variables={
+                {
+                  user_id: this.props.user.id,
+                  text: this.state.snap}
+                }
+              refetchQueries={[{query: allSnaps}]}
+              >
               {(addSnapFunction, {loading, error, data}) => (
                 <form onSubmit={e => this.sendSnap(e, addSnapFunction)}>
                     <input name="snap" value={this.state.snap} onChange={this.updateState} className="add-snap__input" type="text" placeholder="add snap" />
