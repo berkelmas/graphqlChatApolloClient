@@ -51,6 +51,22 @@ class AddSnap extends React.Component {
   }
 
   render() {
+    const {username, id} = this.props.user;
+    const {snap} = this.state;
+    const optimisticResponse = {
+      __typename: "Mutation",
+      snapMutation: {
+        __typename: "snapMutation",
+        id: Math.round(Math.random()*-200000), // - li id olursa; html style değiştireceğiz.
+        text: snap,
+        user_id: id,
+        user: {
+          __typename: "User",
+          id: Math.round(Math.random()*200000),
+          username
+        }
+      }
+    }
     return (
       <div>
         <div className="description">
@@ -62,8 +78,9 @@ class AddSnap extends React.Component {
           {this.props.user &&
             <Mutation
               mutation={snapMutation}
-              variables={{text: this.state.snap, user_id: this.props.user.id}}
+              variables={{text: snap, user_id: id}}
               update={this.updateCache}
+              optimisticResponse={optimisticResponse}
             >
               {(addSnapFunction, {loading, error, data}) => (
                 <form onSubmit={e => this.sendSnap(e, addSnapFunction)}>
