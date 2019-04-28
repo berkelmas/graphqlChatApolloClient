@@ -2,6 +2,9 @@ import React, {Fragment} from 'react'
 import {Query} from 'react-apollo';
 import {allSnaps} from '../../backend/query';
 
+import {UserLoginSubscription} from './UserLoginSubscription';
+import {UserRegisterSubscription} from './UserRegisterSubscription';
+
 export const Snaps = props => {
   return (
     <Query query={allSnaps}>
@@ -13,6 +16,8 @@ export const Snaps = props => {
           <div>
             <div>
                 <ul className="snaps">
+                  <UserLoginSubscription/>
+                  <UserRegisterSubscription/>
                   {data.allSnaps.slice(0).reverse().map(res => (
                     <Fragment key={res.id}>
                       <li className={res.id < 0 ? 'optimistic' : 'yok'}>
