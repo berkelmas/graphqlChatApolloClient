@@ -74,7 +74,7 @@ class AddSnap extends React.Component {
                   user_id: this.props.user.id,
                   user: {
                     __typename: "User",
-                    id: Math.round(Math.random()*200000),
+                    id: this.props.user.id,
                     username: this.props.user.username
                   }
                 }
@@ -83,6 +83,10 @@ class AddSnap extends React.Component {
               {(addSnapFunction, {loading, error, data}) => (
                 <form onSubmit={e => this.sendSnap(e, addSnapFunction)}>
                     <input name="snap" value={this.state.snap} onChange={this.updateState} className="add-snap__input" type="text" placeholder="add snap" />
+                    <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                      <button style={{margin: '5px', padding: '10px', color : 'gray', backgroundColor: 'white'}} type="submit">Gönder</button>
+                    </div>
+
                 </form>
               )}
             </Mutation>

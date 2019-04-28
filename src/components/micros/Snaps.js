@@ -4,14 +4,34 @@ import {allSnaps} from '../../backend/query';
 
 import {UserLoginSubscription} from './UserLoginSubscription';
 import {UserRegisterSubscription} from './UserRegisterSubscription';
+import {snapAddedSubs} from '../../backend/subscription';
 
 export const Snaps = props => {
   return (
     <Query query={allSnaps}>
-      {({loading, error, data, refetch}) => {
+      {({loading, error, data, subscribeToMore}) => {
         if (loading) return (<p>Geliyor Knk</p>)
         if (error) return (<p>Yükleniyor Knk</p>)
-        else {
+        if (data) {
+
+          subscribeToMore({
+            document: snapAddedSubs,
+            updateQuery: (prev, {subscriptionData}) => {
+              if(!subscriptionData.data) return prev;
+
+              const newSnap = subscriptionData.data.snapSubscription;
+              if(!prev.allSnaps.find(snap => snap.id === newSnap.id)) {
+                return ({
+                  ...prev,
+                  allSnaps: [...prev.allSnaps, newSnap]
+                });
+              } else {
+                return prev;
+              }
+
+            }
+          })
+
           return (
           <div>
             <div>
@@ -24,6 +44,7 @@ export const Snaps = props => {
                           <div className="title">{res.text}</div>
                           <div className="date">
                               <span>{res.user.username}</span>
+
                           </div>
                       </li>
                     </Fragment>

@@ -5,9 +5,10 @@ subscription {
   snapSubscription {
     id
     text
+    user_id
     user {
-      username
       id
+      username
     }
   }
 }

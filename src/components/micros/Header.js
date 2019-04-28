@@ -6,7 +6,7 @@ export const Header = ({user, refetch}) => {
   return user ? (
     <div className="header">
         <div className="logo">
-            <h2 className="logo__title">easysnap</h2>
+            <h2 className="logo__title">Adliye Chat</h2>
         </div>
 
         <div className="header_menu">
